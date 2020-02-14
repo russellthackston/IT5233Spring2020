@@ -10,10 +10,15 @@ $password = "";
 $success = FALSE;
 $failure = FALSE;
 
+/*
+Generates a new set of random credentials and writes them to credentials.txt
+*/
 function makeCredentials() {
-	
+
+	// Bring in the global variable with the credentials filename
 	global $CREDFILE;
 
+	// delete any existing credentials file
 	if (file_exists($CREDFILE)) {
 		unlink($CREDFILE);
 	}
@@ -53,10 +58,12 @@ without ever knowing the right credentials (unless you peek ;^).
 */
 
 
+// generate a random set of credentials if one deosn't already exist
 if (!file_exists($CREDFILE)) {
 	makeCredentials();
 }
 
+// check credentials on the login attempt
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	// Get the username and password submitted by the client
