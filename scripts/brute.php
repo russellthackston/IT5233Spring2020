@@ -10,16 +10,18 @@ $password = "";
 $success = FALSE;
 $failure = FALSE;
 
-/*
-Generates a new set of random credentials and writes them to credentials.txt
-*/
 function makeCredentials() {
-
-	// Bring in the global variable with the credentials filename
+	
 	global $CREDFILE;
 
-	// delete any existing credentials file
 	if (file_exists($CREDFILE)) {
+		$creds = explode(PHP_EOL, file_get_contents($CREDFILE));
+		$f = fopen($CREDFILE.'.history', 'a');
+		fwrite($f, $creds[0]);
+		fwrite($f, ',');
+		fwrite($f, $creds[1]);
+		fwrite($f, PHP_EOL);
+		fclose($f);
 		unlink($CREDFILE);
 	}
 
@@ -58,12 +60,15 @@ without ever knowing the right credentials (unless you peek ;^).
 */
 
 
-// generate a random set of credentials if one deosn't already exist
 if (!file_exists($CREDFILE)) {
 	makeCredentials();
 }
 
-// check credentials on the login attempt
+$creds = [];
+if (file_exists($CREDFILE.'.history')) {
+	$creds = explode(PHP_EOL, file_get_contents($CREDFILE.'.history'));
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	// Get the username and password submitted by the client
@@ -129,6 +134,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		Wrong password.
 	  <?php } ?>
   </p>
+
+<h1>Found credentials:</h1>
+<?php 
+for($i = 0; $i < sizeof($creds); $i++) {
+	echo($creds[$i] . '<br>');
+} ?>
 
 </body>
 </html>
