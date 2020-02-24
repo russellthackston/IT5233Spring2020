@@ -3,9 +3,9 @@
 import socket, itertools, sys, random, ssl
 
 # message variables
-host = "russellthackston.me"
-path = "/wishlist.php"
-cookiename = "wishit_session_id"
+host = "example.com"
+path = "/"
+cookiename = "session_id"
 
 """
 This function sends an HTTP request to try and access a session protected page
