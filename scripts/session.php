@@ -73,8 +73,8 @@ if (!array_key_exists('sessionid', $_SESSION)) {
 <head>
   <meta charset="utf-8">
 
-  <title>Brute Force Lab</title>
-  <meta name="description" content="Brute Force Lab">
+  <title>Session Hijacking Lab</title>
+  <meta name="description" content="Session Hijacking Lab">
   <meta name="author" content="Russell Thackston">
   <style>
     p.success { color: green; }
@@ -83,7 +83,7 @@ if (!array_key_exists('sessionid', $_SESSION)) {
 
 </head>
 <body>
-	<h1>Attacking Sessions Lab</h1>
+	<h1>Session Hijacking Lab</h1>
 	
 	<h2>Instructions</h2>
 	<p>
